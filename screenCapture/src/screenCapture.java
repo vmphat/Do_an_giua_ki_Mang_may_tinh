@@ -10,20 +10,19 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;  
 
-public class screenCapture extends JFrame implements ActionListener {
-
+public class screenCapture extends JFrame implements ActionListener 
+{
     JButton b;
-    public screenCapture() {
-        this.setVisible(true);
-        this.setLayout(null);
+    public screenCapture(int x, int y, JFrame mainFrame) 
+    {
         b = new JButton("Capture Screen");
-        b.setBounds(380, 290, 140, 60);
+        b.setBounds(x, y, 140, 60);
         b.setBackground(Color.red);
         b.setVisible(true);
         b.addActionListener(this);
-        add(b);
-        setSize(1000, 600);
-    }
+        mainFrame.add(b);
+    }   
+
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == b) 
