@@ -1,5 +1,7 @@
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 public class Client {
     public Socket clientSocket;
 
@@ -13,8 +15,10 @@ public class Client {
         }
         try {
             this.clientSocket = new Socket(ip, port);
+            JOptionPane.showMessageDialog(null, "Kết nối đến server thành công");
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi kết nối dến server");
         }
     }
 

@@ -3,7 +3,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AppDesign extends JFrame {
@@ -16,9 +15,13 @@ public class AppDesign extends JFrame {
     private JButton butReg = new JButton("<html><center>" + "Sửa registry" + "</center></html>");
     private JButton butExit = new JButton("<html><center>" + "Thoát" + "</center></html>");
     private JButton butPic = new JButton("<html><center>" + "Chụp màn hình" + "</center></html>");
-    private JButton butKeyStroke = new JButton("<html><center>" + "Chụp màn hình" + "</center></html>");
+    private JButton butKeyStroke = new JButton("<html><center>" + "Key stroke" + "</center></html>");
 
     private Client client = new Client();
+    private KeyStroke keyStroke = new KeyStroke();
+    private ProcessesController processesController = new ProcessesController();
+    private RegistryEditor registryEditor = new RegistryEditor();
+    private ScreenCapture screenCapture = new ScreenCapture();
 
     AppDesign() {
         setBounds(0, 0, 400, 300);
@@ -30,12 +33,6 @@ public class AppDesign extends JFrame {
     public void ShowButton() {
         txtIP.setBounds(10, 10, 200, 20);
         butConnect.setBounds(220, 10, 100, 20);
-        butConnect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Connect();
-            }
-        });
         add(txtIP);
         add(butConnect);
 
@@ -46,6 +43,7 @@ public class AppDesign extends JFrame {
         butReg.setBounds(80, 180, 200, 70);
         butPic.setBounds(200, 110, 80, 60);
         butKeyStroke.setBounds(290, 40, 80, 130);
+
         butExit.setBounds(290, 180, 80, 70);
         add(butProcess);
         add(butApp);
@@ -54,14 +52,53 @@ public class AppDesign extends JFrame {
         add(butPic);
         add(butKeyStroke);
         add(butExit);
+        setVisible(true);
+        AddAction();
     }
 
-    private void Connect() {
-        this.client.Connect(this.txtIP.getName(), 5656);
-        if (!this.client.IsConnected()) {
-            JOptionPane.showMessageDialog(null, "Lỗi kết nối");
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Kết nối thành công");
+    private void AddAction() {
+        butConnect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                client.Connect(txtIP.getName(), 5656);
+            }
+        });
+
+        butKeyStroke.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                keyStroke.Open();
+            }
+
+        });
+
+        butProcess.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processesController.Open();
+            }
+        });
+
+        butExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                client.Close();
+                System.exit(0);
+            }
+        });
+
+        butReg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registryEditor.Open();
+            }
+        });
+
+        butPic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screenCapture.Open();
+            }
+        });
     }
 }

