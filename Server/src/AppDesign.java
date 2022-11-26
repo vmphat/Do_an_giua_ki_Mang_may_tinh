@@ -30,7 +30,6 @@ public class AppDesign extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 server.OpenServer(5656);
                 System.out.println("IP: " + server.ShowIP());
-                keyLogger = new KeyLogger();
                 startButton.setEnabled(false);
                 Thread thread = new Thread() {
                     public void run() {

@@ -60,7 +60,7 @@ public class AppDesign extends JFrame {
         butConnect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.Connect(txtIP.getName(), 5656);
+                client.Connect(txtIP.getText(), 5656);
             }
         });
 

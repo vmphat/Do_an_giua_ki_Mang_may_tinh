@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 public class Server {
     public ServerSocket serverSocket;
     public Socket clientSocket;
+    public InetAddress host;
 
     Server() {
         try {
@@ -17,7 +18,6 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void OpenServer(int port) {

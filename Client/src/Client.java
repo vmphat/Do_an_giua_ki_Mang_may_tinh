@@ -16,6 +16,7 @@ public class Client {
         try {
             this.clientSocket = new Socket(ip, port);
             JOptionPane.showMessageDialog(null, "Kết nối đến server thành công");
+            System.out.println(clientSocket.getInetAddress().getHostAddress().toString());
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Lỗi kết nối dến server");
